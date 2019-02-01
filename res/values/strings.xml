@@ -1,0 +1,47 @@
+<resources>
+    <string name="app_name">音乐球Pro</string>
+
+    <!--MainActivity-->
+    <string name="state">状态</string>
+    <string name="main_switch">总开关</string>
+
+    <string name="permission">权限</string>
+    <string name="run_in_background">后台运行权限</string>
+    <string name="run_in_background_src">某些ROM上需要开启</string>
+    <string name="show_overlay">悬浮球权限</string>
+    <string name="notification_listener">通知使用权</string>
+
+    <string name="setting">配置</string>
+    <string name="ball_size">小球大小</string>
+    <string name="ball_border_width">小球边框宽度</string>
+    <string name="ball_background_size">小球背景半透明大小</string>
+    <string name="keep_edge">自动贴边</string>
+    <string name="avoid_keyboard">避让输入法</string>
+    <string name="click_to_set_up_keyboard_size">点击记录输入法高度</string>
+    <string name="keyboard_size">当前输入法高度：%1$d</string>
+
+    <string name="about">关于</string>
+    <string name="version">当前版本: 1.0</string>
+    <string name="author">作者: 何言</string>
+
+    <string name="dialog_title_author">作者</string>
+    <string name="dialog_msg_author"> &#160;Q Q\t\t : 1371735400 \n 微信\t : 1371735400\n 酷安\t : @执着的何言</string>
+
+    <string name="donation">如果你喜欢本软件，请支持我！</string>
+    <string name="savePng">请用微信扫码！</string>
+
+    <!--NulActivity-->
+    <string name="something_wrong">哎呀，怎么全坏了……</string>
+    <string name="phone_msg">手机信息</string>
+    <string name="phone_model">手机型号：%1$s</string>
+    <string name="android_version">安卓版本：%1$s</string>
+    <string name="error_log">报错日志（自动上报作者）</string>
+
+    <!--Toast-->
+    <string name="please_close_main_switch">请先关闭总开关</string>
+    <string name="please_allow_permission">请授予小球相关权限</string>
+    <string name="please_allow_draw_overlay">请授予小球悬浮窗权限</string>
+    <string name="please_allow_notification_listener">请授予小球通知使用权</string>
+    <string name="please_allow_run_on_back">请允许小球在后台运行</string>
+
+</resources>
