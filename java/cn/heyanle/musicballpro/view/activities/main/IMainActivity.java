@@ -27,5 +27,7 @@ public interface IMainActivity {
      */
     Context getContext();
 
+    void finishMy();
+
 
 }

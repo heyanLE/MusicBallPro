@@ -12,7 +12,8 @@ import android.widget.FrameLayout;
 import android.widget.RelativeLayout;
 
 import cn.heyanle.musicballpro.R;
-import cn.heyanle.musicballpro.model.MusicModel;
+import cn.heyanle.musicballpro.models.MainModel;
+import cn.heyanle.musicballpro.models.MusicModel;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 /**
@@ -53,6 +54,10 @@ public class MusicBall extends RelativeLayout {
      * 开始旋转
      */
     public void startTurn(){
+        if (!MainModel.getInstance().isTurn()){
+            objectAnimator.end();
+            return;
+        }
         if (isTurn == 1){//如果是暂停状态
             objectAnimator.resume(); //继续旋转
             isTurn = 2;
@@ -66,6 +71,10 @@ public class MusicBall extends RelativeLayout {
      * 停止旋转
      */
     public void stopTurn(){
+        if (!MainModel.getInstance().isTurn()){
+            objectAnimator.end();
+            return;
+        }
         objectAnimator.end();
         isTurn = 0;
     }
@@ -74,6 +83,10 @@ public class MusicBall extends RelativeLayout {
      * 暂停旋转
      */
     public void pauseTurn(){
+        if (!MainModel.getInstance().isTurn()){
+            objectAnimator.end();
+            return;
+        }
         objectAnimator.pause();
         isTurn = 1;
     }

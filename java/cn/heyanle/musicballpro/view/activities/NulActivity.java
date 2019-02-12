@@ -1,13 +1,14 @@
 package cn.heyanle.musicballpro.view.activities;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
 import android.widget.TextView;
+import android.widget.Toolbar;
 
 import cn.heyanle.musicballpro.R;
-import cn.heyanle.musicballpro.model.MainModel;
+import cn.heyanle.musicballpro.models.MainModel;
 
 /**
  * 报错界面 Activity
@@ -16,7 +17,7 @@ import cn.heyanle.musicballpro.model.MainModel;
  * 2019/1/26 0026
  * https://github.com/heyanLE
  */
-public class NulActivity extends AppCompatActivity {
+public class NulActivity extends Activity {
 
     public static String INTENT_KEY = "heyanle_nul_intent_key";
 
@@ -28,6 +29,11 @@ public class NulActivity extends AppCompatActivity {
         MainModel.getInstance().isOpen(false).xP(0).yP(0.5f).apply();
 
         initView();
+
+        Toolbar toolbar = findViewById(R.id.activity_nul_tolbar);
+        setActionBar(toolbar);
+
+        toolbar.setTitleTextColor(getResources().getColor(android.R.color.white));
     }
 
     /**

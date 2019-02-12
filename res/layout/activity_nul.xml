@@ -5,12 +5,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <android.support.v7.widget.Toolbar
-        app:title="@string/something_wrong"
-        app:titleTextColor="#fff"
+    <Toolbar
+        android:id="@+id/activity_nul_tolbar"
+        android:title="@string/something_wrong"
+        android:titleTextColor="#fff"
         android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:background="?attr/colorPrimary"
+        android:layout_height="50dp"
+        android:background="@color/colorPrimary"
         android:elevation="8dp"/>
 
     <ScrollView

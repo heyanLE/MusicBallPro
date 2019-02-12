@@ -6,506 +6,718 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <android.support.v7.widget.Toolbar
-        app:title="@string/app_name"
-        app:titleTextColor="#fff"
+    <Toolbar
+        android:titleTextColor="#fff"
+        android:id="@+id/activity_main_toolbar"
+        android:title="@string/app_name"
         android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:background="?attr/colorPrimary"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"
         android:elevation="8dp"/>
 
-    <ScrollView
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent">
 
-        <LinearLayout
-            android:orientation="vertical"
+        <ScrollView
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <android.support.v7.widget.CardView
-                android:layout_marginTop="8dp"
+            <LinearLayout
+                android:orientation="vertical"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:cardElevation="6dp">
-
-                <LinearLayout
-                    android:paddingBottom="8dp"
-                    android:orientation="vertical"
+                android:layout_height="wrap_content">
+                <android.support.v7.widget.CardView
+                    android:layout_marginTop="8dp"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    app:cardElevation="6dp">
 
-                    <TextView
-                        android:layout_margin="15dp"
-                        android:textSize="15sp"
-                        android:textColor="@color/colorAccent"
-                        android:text="@string/state"
+                    <LinearLayout
+                        android:paddingBottom="8dp"
+                        android:orientation="vertical"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
-
-                    <cn.heyanle.musicballpro.view.view.SwitchRelative
-                        android:background="@drawable/ripple_bg"
-                        android:id="@+id/activity_rLayout_mainSwitch"
-                        android:layout_width="match_parent"
-                        android:layout_height="60dp">
-
-                        <ImageView
-                            android:layout_margin="20dp"
-                            android:layout_centerVertical="true"
-                            android:layout_width="20dp"
-                            android:layout_height="20dp"
-                            android:src="@drawable/ic_vintage"
-                            android:contentDescription="@string/main_switch" />
+                        android:layout_height="wrap_content">
 
                         <TextView
-                            android:layout_marginStart="60dp"
-                            android:layout_centerVertical="true"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/main_switch"
-                            tools:ignore="RelativeOverlap" />
-
-                    </cn.heyanle.musicballpro.view.view.SwitchRelative>
-
-                </LinearLayout>
-
-            </android.support.v7.widget.CardView>
-
-            <android.support.v7.widget.CardView
-                android:layout_marginTop="8dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:cardElevation="6dp">
-
-                <LinearLayout
-                    android:paddingBottom="8dp"
-                    android:orientation="vertical"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-                    <TextView
-                        android:layout_margin="15dp"
-                        android:textSize="15sp"
-                        android:textColor="@color/colorAccent"
-                        android:text="@string/permission"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
-
-                    <RelativeLayout
-                        android:background="@drawable/ripple_bg"
-                        android:id="@+id/activity_rLayout_runInBack"
-                        android:layout_width="match_parent"
-                        android:layout_height="60dp">
-
-                        <ImageView
-                            android:layout_margin="20dp"
-                            android:layout_centerVertical="true"
-                            android:layout_width="20dp"
-                            android:layout_height="20dp"
-                            android:src="@drawable/ic_run_on_background"
-                            android:contentDescription="@string/run_in_background" />
-
-                        <LinearLayout
-                            android:orientation="vertical"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="60dp"
-                            android:layout_centerVertical="true"
-                            tools:ignore="RelativeOverlap">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="@string/run_in_background"
-                                tools:ignore="RelativeOverlap" />
-
-                            <TextView
-                                android:textColor="@color/colorFont"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="@string/run_in_background_src"
-                                tools:ignore="RelativeOverlap" />
-
-                        </LinearLayout>
-
-                        <ImageView
-                            android:src="@drawable/ic_right"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_centerVertical="true"
-                            android:layout_alignParentEnd="true"
-                            android:layout_marginEnd="20dp"
-                            tools:ignore="ContentDescription" />
-
-                    </RelativeLayout>
-
-                    <cn.heyanle.musicballpro.view.view.SwitchRelative
-                        android:background="@drawable/ripple_bg"
-                        android:id="@+id/activity_rLayout_notification"
-                        android:layout_width="match_parent"
-                        android:layout_height="60dp">
-
-                        <ImageView
-                            android:layout_margin="20dp"
-                            android:layout_centerVertical="true"
-                            android:layout_width="20dp"
-                            android:layout_height="20dp"
-                            android:src="@drawable/ic_notification_listener"
-                            android:contentDescription="@string/notification_listener" />
-
-                        <TextView
-                            android:layout_marginStart="60dp"
-                            android:layout_centerVertical="true"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/notification_listener"
-                            tools:ignore="RelativeOverlap" />
-
-                    </cn.heyanle.musicballpro.view.view.SwitchRelative>
-
-                    <cn.heyanle.musicballpro.view.view.SwitchRelative
-                        android:background="@drawable/ripple_bg"
-                        android:id="@+id/activity_rLayout_overlay"
-                        android:layout_width="match_parent"
-                        android:layout_height="60dp">
-
-                        <ImageView
-                            android:layout_margin="20dp"
-                            android:layout_centerVertical="true"
-                            android:layout_width="20dp"
-                            android:layout_height="20dp"
-                            android:src="@drawable/ic_show_overlay"
-                            android:contentDescription="@string/show_overlay" />
-
-                        <TextView
-                            android:layout_marginStart="60dp"
-                            android:layout_centerVertical="true"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/show_overlay"
-                            tools:ignore="RelativeOverlap" />
-
-                    </cn.heyanle.musicballpro.view.view.SwitchRelative>
-
-                </LinearLayout>
-
-            </android.support.v7.widget.CardView>
-
-            <android.support.v7.widget.CardView
-                android:layout_marginTop="8dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:cardElevation="6dp">
-
-                <LinearLayout
-                    android:paddingBottom="8dp"
-                    android:orientation="vertical"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-                    <TextView
-                        android:layout_margin="15dp"
-                        android:textSize="15sp"
-                        android:textColor="@color/colorAccent"
-                        android:text="@string/setting"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
-
-                    <RelativeLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="60dp">
-
-                        <ImageView
-                            android:layout_margin="20dp"
-                            android:layout_centerVertical="true"
-                            android:layout_width="20dp"
-                            android:layout_height="20dp"
-                            android:src="@drawable/ic_ball"
-                            android:contentDescription="@string/ball_size" />
-
-                        <LinearLayout
-                            android:orientation="vertical"
+                            android:layout_margin="15dp"
+                            android:textSize="15sp"
+                            android:textColor="@color/colorAccent"
+                            android:text="@string/state"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="60dp"
-                            android:layout_marginEnd="20dp"
-                            android:layout_centerVertical="true">
+                            android:layout_height="wrap_content" />
+
+                        <cn.heyanle.musicballpro.view.view.SwitchRelative
+                            android:background="@drawable/ripple_bg"
+                            android:id="@+id/activity_rLayout_mainSwitch"
+                            android:layout_width="match_parent"
+                            android:layout_height="60dp">
+
+                            <ImageView
+                                android:layout_margin="20dp"
+                                android:layout_centerVertical="true"
+                                android:layout_width="20dp"
+                                android:layout_height="20dp"
+                                android:src="@drawable/ic_vintage"
+                                android:contentDescription="@string/main_switch" />
 
                             <TextView
+                                android:layout_marginStart="60dp"
+                                android:layout_centerVertical="true"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="@string/ball_size"
+                                android:text="@string/main_switch"
                                 tools:ignore="RelativeOverlap" />
 
-                            <SeekBar
-                                android:id="@+id/activity_seek_ballSize"
-                                android:layout_marginTop="8dp"
-                                android:textColor="@color/colorFont"
+                        </cn.heyanle.musicballpro.view.view.SwitchRelative>
+
+                    </LinearLayout>
+
+                </android.support.v7.widget.CardView>
+
+                <android.support.v7.widget.CardView
+                    android:layout_marginTop="8dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:cardElevation="6dp">
+
+                    <LinearLayout
+                        android:paddingBottom="8dp"
+                        android:orientation="vertical"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:layout_margin="15dp"
+                            android:textSize="15sp"
+                            android:textColor="@color/colorAccent"
+                            android:text="@string/permission"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content" />
+
+                        <RelativeLayout
+                            android:background="@drawable/ripple_bg"
+                            android:id="@+id/activity_rLayout_runInBack"
+                            android:layout_width="match_parent"
+                            android:layout_height="60dp">
+
+                            <ImageView
+                                android:layout_margin="20dp"
+                                android:layout_centerVertical="true"
+                                android:layout_width="20dp"
+                                android:layout_height="20dp"
+                                android:src="@drawable/ic_run_on_background"
+                                android:contentDescription="@string/run_in_background" />
+
+                            <LinearLayout
+                                android:orientation="vertical"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="60dp"
+                                android:layout_centerVertical="true"
+                                tools:ignore="RelativeOverlap">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="@string/run_in_background"
+                                    tools:ignore="RelativeOverlap" />
+
+                                <TextView
+                                    android:textColor="@color/colorFont"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="@string/run_in_background_src"
+                                    tools:ignore="RelativeOverlap" />
+
+                            </LinearLayout>
+
+                            <ImageView
+                                android:src="@drawable/ic_right"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_centerVertical="true"
+                                android:layout_alignParentEnd="true"
+                                android:layout_marginEnd="20dp"
+                                tools:ignore="ContentDescription" />
+
+                        </RelativeLayout>
+
+                        <cn.heyanle.musicballpro.view.view.SwitchRelative
+                            android:background="@drawable/ripple_bg"
+                            android:id="@+id/activity_rLayout_notification"
+                            android:layout_width="match_parent"
+                            android:layout_height="60dp">
+
+                            <ImageView
+                                android:layout_margin="20dp"
+                                android:layout_centerVertical="true"
+                                android:layout_width="20dp"
+                                android:layout_height="20dp"
+                                android:src="@drawable/ic_notification_listener"
+                                android:contentDescription="@string/notification_listener" />
+
+                            <TextView
+                                android:layout_marginStart="60dp"
+                                android:layout_centerVertical="true"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/notification_listener"
+                                tools:ignore="RelativeOverlap" />
+
+                        </cn.heyanle.musicballpro.view.view.SwitchRelative>
+
+                        <cn.heyanle.musicballpro.view.view.SwitchRelative
+                            android:background="@drawable/ripple_bg"
+                            android:id="@+id/activity_rLayout_overlay"
+                            android:layout_width="match_parent"
+                            android:layout_height="60dp">
+
+                            <ImageView
+                                android:layout_margin="20dp"
+                                android:layout_centerVertical="true"
+                                android:layout_width="20dp"
+                                android:layout_height="20dp"
+                                android:src="@drawable/ic_show_overlay"
+                                android:contentDescription="@string/show_overlay" />
+
+                            <TextView
+                                android:layout_marginStart="60dp"
+                                android:layout_centerVertical="true"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/show_overlay"
+                                tools:ignore="RelativeOverlap" />
+
+                        </cn.heyanle.musicballpro.view.view.SwitchRelative>
+
+                    </LinearLayout>
+
+                </android.support.v7.widget.CardView>
+
+                <android.support.v7.widget.CardView
+                    android:layout_marginTop="8dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:cardElevation="6dp">
+
+                    <LinearLayout
+                        android:paddingBottom="8dp"
+                        android:orientation="vertical"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:layout_margin="15dp"
+                            android:textSize="15sp"
+                            android:textColor="@color/colorAccent"
+                            android:text="@string/setting"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content" />
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="60dp">
+
+                            <ImageView
+                                android:layout_margin="20dp"
+                                android:layout_centerVertical="true"
+                                android:layout_width="20dp"
+                                android:layout_height="20dp"
+                                android:src="@drawable/ic_ball"
+                                android:contentDescription="@string/ball_size" />
+
+                            <LinearLayout
+                                android:orientation="vertical"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                tools:ignore="RelativeOverlap" />
+                                android:layout_marginStart="60dp"
+                                android:layout_marginEnd="20dp"
+                                android:layout_centerVertical="true">
 
-                        </LinearLayout>
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="@string/ball_size"
+                                    tools:ignore="RelativeOverlap" />
 
-                    </RelativeLayout>
+                                <SeekBar
+                                    android:id="@+id/activity_seek_ballSize"
+                                    android:layout_marginTop="8dp"
+                                    android:textColor="@color/colorFont"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    tools:ignore="RelativeOverlap" />
 
-                    <RelativeLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="60dp">
+                            </LinearLayout>
 
-                        <ImageView
-                            android:layout_margin="20dp"
-                            android:layout_centerVertical="true"
-                            android:layout_width="20dp"
-                            android:layout_height="20dp"
-                            android:src="@drawable/ic_ball_background"
-                            android:contentDescription="@string/ball_background_size" />
+                        </RelativeLayout>
 
-                        <LinearLayout
-                            android:orientation="vertical"
+                        <RelativeLayout
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="60dp"
-                            android:layout_marginEnd="20dp"
-                            android:layout_centerVertical="true">
+                            android:layout_height="60dp">
 
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="@string/ball_background_size"
-                                tools:ignore="RelativeOverlap" />
+                            <ImageView
+                                android:layout_margin="20dp"
+                                android:layout_centerVertical="true"
+                                android:layout_width="20dp"
+                                android:layout_height="20dp"
+                                android:src="@drawable/ic_border"
+                                android:contentDescription="@string/ball_background_size" />
 
-                            <SeekBar
-                                android:id="@+id/activity_seek_alpha"
-                                android:layout_marginTop="8dp"
-                                android:textColor="@color/colorFont"
+                            <LinearLayout
+                                android:orientation="vertical"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                tools:ignore="RelativeOverlap" />
+                                android:layout_marginStart="60dp"
+                                android:layout_marginEnd="20dp"
+                                android:layout_centerVertical="true">
 
-                        </LinearLayout>
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="@string/ball_background_size"
+                                    tools:ignore="RelativeOverlap" />
 
-                    </RelativeLayout>
+                                <SeekBar
+                                    android:id="@+id/activity_seek_alpha"
+                                    android:layout_marginTop="8dp"
+                                    android:textColor="@color/colorFont"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    tools:ignore="RelativeOverlap" />
 
-                    <RelativeLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="60dp">
+                            </LinearLayout>
 
-                        <ImageView
-                            android:layout_margin="20dp"
-                            android:layout_centerVertical="true"
-                            android:layout_width="20dp"
-                            android:layout_height="20dp"
-                            android:src="@drawable/ic_ball_border"
-                            android:contentDescription="@string/ball_border_width" />
+                        </RelativeLayout>
 
-                        <LinearLayout
-                            android:orientation="vertical"
+                        <RelativeLayout
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="60dp"
-                            android:layout_marginEnd="20dp"
-                            android:layout_centerVertical="true">
+                            android:layout_height="60dp">
 
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="@string/ball_border_width"
-                                tools:ignore="RelativeOverlap" />
+                            <ImageView
+                                android:layout_margin="20dp"
+                                android:layout_centerVertical="true"
+                                android:layout_width="20dp"
+                                android:layout_height="20dp"
+                                android:src="@drawable/ic_ball_border"
+                                android:contentDescription="@string/ball_border_width" />
 
-                            <SeekBar
-                                android:id="@+id/activity_seek_border"
-                                android:layout_marginTop="8dp"
-                                android:textColor="@color/colorFont"
+                            <LinearLayout
+                                android:orientation="vertical"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
+                                android:layout_marginStart="60dp"
+                                android:layout_marginEnd="20dp"
+                                android:layout_centerVertical="true">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="@string/ball_border_width"
+                                    tools:ignore="RelativeOverlap" />
+
+                                <SeekBar
+                                    android:id="@+id/activity_seek_border"
+                                    android:layout_marginTop="8dp"
+                                    android:textColor="@color/colorFont"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    tools:ignore="RelativeOverlap" />
+
+                            </LinearLayout>
+
+                        </RelativeLayout>
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="60dp">
+
+                            <ImageView
+                                android:layout_margin="20dp"
+                                android:layout_centerVertical="true"
+                                android:layout_width="20dp"
+                                android:layout_height="20dp"
+                                android:src="@drawable/ic_ball_background"
+                                android:contentDescription="@string/ball_border_width" />
+
+                            <LinearLayout
+                                android:orientation="vertical"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="60dp"
+                                android:layout_marginEnd="20dp"
+                                android:layout_centerVertical="true">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="@string/ball_alpha"
+                                    tools:ignore="RelativeOverlap" />
+
+                                <SeekBar
+                                    android:id="@+id/activity_seek_lpha"
+                                    android:layout_marginTop="8dp"
+                                    android:textColor="@color/colorFont"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    tools:ignore="RelativeOverlap" />
+
+                            </LinearLayout>
+
+                        </RelativeLayout>
+
+                        <cn.heyanle.musicballpro.view.view.SwitchRelative
+                            android:background="@drawable/ripple_bg"
+                            android:id="@+id/activity_rLayout_line"
+                            android:layout_width="match_parent"
+                            android:layout_height="60dp">
+
+                            <ImageView
+                                android:layout_margin="20dp"
+                                android:layout_centerVertical="true"
+                                android:layout_width="20dp"
+                                android:layout_height="20dp"
+                                android:src="@drawable/ic_keep_edge"
+                                android:contentDescription="@string/keep_edge" />
+
+                            <TextView
+                                android:layout_marginStart="60dp"
+                                android:layout_centerVertical="true"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/keep_edge"
                                 tools:ignore="RelativeOverlap" />
 
-                        </LinearLayout>
+                        </cn.heyanle.musicballpro.view.view.SwitchRelative>
 
-                    </RelativeLayout>
+                        <cn.heyanle.musicballpro.view.view.SwitchRelative
+                            android:background="@drawable/ripple_bg"
+                            android:id="@+id/activity_rLayout_round"
+                            android:layout_width="match_parent"
+                            android:layout_height="60dp">
 
-                    <cn.heyanle.musicballpro.view.view.SwitchRelative
-                        android:background="@drawable/ripple_bg"
-                        android:id="@+id/activity_rLayout_line"
+                            <ImageView
+                                android:layout_margin="20dp"
+                                android:layout_centerVertical="true"
+                                android:layout_width="20dp"
+                                android:layout_height="20dp"
+                                android:src="@drawable/ic_round"
+                                android:contentDescription="@string/keep_edge" />
+
+                            <TextView
+                                android:layout_marginStart="60dp"
+                                android:layout_centerVertical="true"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/round"
+                                tools:ignore="RelativeOverlap" />
+
+                        </cn.heyanle.musicballpro.view.view.SwitchRelative>
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="60dp">
+
+                            <cn.heyanle.musicballpro.view.view.SwitchRelative
+                                android:background="@drawable/ripple_bg"
+                                android:id="@+id/activity_rLayout_dodge"
+                                android:layout_alignParentEnd="true"
+                                android:layout_width="80dp"
+                                android:layout_height="match_parent">
+
+                            </cn.heyanle.musicballpro.view.view.SwitchRelative>
+
+                            <RelativeLayout
+                                android:background="@drawable/ripple_bg"
+                                android:id="@+id/activity_rLayout_set"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_marginEnd="80dp">
+
+                                <ImageView
+                                    android:layout_margin="20dp"
+                                    android:layout_centerVertical="true"
+                                    android:layout_width="20dp"
+                                    android:layout_height="20dp"
+                                    android:src="@drawable/ic_avoid_keyboard"
+                                    android:contentDescription="@string/avoid_keyboard" />
+
+                                <LinearLayout
+                                    android:orientation="vertical"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="60dp"
+                                    android:layout_centerVertical="true"
+                                    tools:ignore="RelativeOverlap">
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="@string/avoid_keyboard"
+                                        tools:ignore="RelativeOverlap" />
+
+                                    <TextView
+                                        android:id="@+id/activity_tv"
+                                        android:textColor="@color/colorFont"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="@string/click_to_set_up_keyboard_size"
+                                        tools:ignore="RelativeOverlap" />
+
+                                </LinearLayout>
+
+                                <View
+                                    android:background="#000"
+                                    android:layout_width="1dp"
+                                    android:layout_height="40dp"
+                                    android:layout_centerVertical="true"
+                                    android:layout_alignParentEnd="true" />
+
+
+                            </RelativeLayout>
+
+                        </RelativeLayout>
+
+                        <RelativeLayout
+                            android:background="@drawable/ripple_bg"
+                            android:id="@+id/activity_rLayout_note"
+                            android:layout_width="match_parent"
+                            android:layout_height="60dp">
+
+                            <ImageView
+                                android:layout_margin="20dp"
+                                android:layout_centerVertical="true"
+                                android:layout_width="20dp"
+                                android:layout_height="20dp"
+                                android:src="@drawable/ic_note"
+                                android:contentDescription="@string/donation" />
+
+                            <TextView
+                                android:layout_marginStart="60dp"
+                                android:layout_centerVertical="true"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/white_list"
+                                tools:ignore="RelativeOverlap" />
+
+                            <ImageView
+                                android:src="@drawable/ic_right"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_centerVertical="true"
+                                android:layout_alignParentEnd="true"
+                                android:layout_marginEnd="20dp"
+                                tools:ignore="ContentDescription" />
+
+                        </RelativeLayout>
+
+                    </LinearLayout>
+
+                </android.support.v7.widget.CardView>
+
+                <android.support.v7.widget.CardView
+                    android:layout_marginTop="8dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:cardElevation="6dp">
+
+                    <LinearLayout
+                        android:paddingBottom="8dp"
+                        android:orientation="vertical"
                         android:layout_width="match_parent"
-                        android:layout_height="60dp">
-
-                        <ImageView
-                            android:layout_margin="20dp"
-                            android:layout_centerVertical="true"
-                            android:layout_width="20dp"
-                            android:layout_height="20dp"
-                            android:src="@drawable/ic_keep_edge"
-                            android:contentDescription="@string/keep_edge" />
+                        android:layout_height="wrap_content">
 
                         <TextView
-                            android:layout_marginStart="60dp"
-                            android:layout_centerVertical="true"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/keep_edge"
-                            tools:ignore="RelativeOverlap" />
+                            android:layout_margin="15dp"
+                            android:textSize="15sp"
+                            android:textColor="@color/colorAccent"
+                            android:text="@string/about"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content" />
 
-                    </cn.heyanle.musicballpro.view.view.SwitchRelative>
+                        <RelativeLayout
+                            android:background="@drawable/ripple_bg"
+                            android:id="@+id/activity_rLayout_version"
+                            android:layout_width="match_parent"
+                            android:layout_height="60dp">
 
-                    <RelativeLayout
-                        android:visibility="gone"
-                        android:background="@drawable/ripple_bg"
-                        android:id="@+id/activity_rLayout_dodge"
-                        android:layout_width="match_parent"
-                        android:layout_height="60dp">
+                            <ImageView
+                                android:layout_margin="20dp"
+                                android:layout_centerVertical="true"
+                                android:layout_width="20dp"
+                                android:layout_height="20dp"
+                                android:src="@drawable/ic_vintage"
+                                android:contentDescription="@string/main_switch" />
 
-                        <ImageView
-                            android:layout_margin="20dp"
-                            android:layout_centerVertical="true"
-                            android:layout_width="20dp"
-                            android:layout_height="20dp"
-                            android:src="@drawable/ic_avoid_keyboard"
-                            android:contentDescription="@string/avoid_keyboard" />
-
-                        <LinearLayout
-                            android:orientation="vertical"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="60dp"
-                            android:layout_centerVertical="true"
-                            tools:ignore="RelativeOverlap">
 
                             <TextView
+                                android:layout_marginStart="60dp"
+                                android:layout_centerVertical="true"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="@string/avoid_keyboard"
+                                android:text="@string/version"
                                 tools:ignore="RelativeOverlap" />
+
+
+                        </RelativeLayout>
+
+                        <RelativeLayout
+                            android:background="@drawable/ripple_bg"
+                            android:id="@+id/activity_rLayout_author"
+                            android:layout_width="match_parent"
+                            android:layout_height="60dp">
+
+                            <ImageView
+                                android:layout_margin="20dp"
+                                android:layout_centerVertical="true"
+                                android:layout_width="20dp"
+                                android:layout_height="20dp"
+                                android:src="@drawable/ic_authoe"
+                                android:contentDescription="@string/author" />
 
                             <TextView
-                                android:textColor="@color/colorFont"
+                                android:layout_marginStart="60dp"
+                                android:layout_centerVertical="true"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="@string/click_to_set_up_keyboard_size"
+                                android:text="@string/author"
                                 tools:ignore="RelativeOverlap" />
 
-                        </LinearLayout>
+                        </RelativeLayout>
 
-                        <View
-                            android:background="#000"
-                            android:layout_width="1dp"
-                            android:layout_height="40dp"
-                            android:layout_centerVertical="true"
-                            android:layout_alignParentEnd="true"
-                            android:layout_marginEnd="80dp"/>
+                        <RelativeLayout
+                            android:background="@drawable/ripple_bg"
+                            android:id="@+id/activity_rLayout_money"
+                            android:layout_width="match_parent"
+                            android:layout_height="60dp">
 
-                        <Switch
-                            android:id="@+id/activity_switch_dodge"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_centerVertical="true"
-                            android:layout_alignParentEnd="true"
-                            android:layout_marginEnd="20dp"/>
+                            <ImageView
+                                android:layout_margin="20dp"
+                                android:layout_centerVertical="true"
+                                android:layout_width="20dp"
+                                android:layout_height="20dp"
+                                android:src="@drawable/ic_money"
+                                android:contentDescription="@string/donation" />
 
-                    </RelativeLayout>
+                            <TextView
+                                android:layout_marginStart="60dp"
+                                android:layout_centerVertical="true"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/donation"
+                                tools:ignore="RelativeOverlap" />
 
-                </LinearLayout>
+                        </RelativeLayout>
 
-            </android.support.v7.widget.CardView>
+                    </LinearLayout>
+                </android.support.v7.widget.CardView>
 
-        <android.support.v7.widget.CardView
-            android:layout_marginTop="8dp"
+            </LinearLayout>
+
+        </ScrollView>
+
+        <cn.heyanle.musicballpro.view.activities.main.MyRelativeLayout
+            android:background="#84000000"
+            android:id="@+id/activity_set_card_v"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:cardElevation="6dp">
+            android:layout_height="match_parent"
+            android:visibility="gone">
 
-        <LinearLayout
-            android:paddingBottom="8dp"
-            android:orientation="vertical"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <TextView
-                android:layout_margin="15dp"
-                android:textSize="15sp"
-                android:textColor="@color/colorAccent"
-                android:text="@string/about"
+            <android.support.v7.widget.CardView
+                android:id="@+id/activity_set_card"
+                app:cardElevation="12dp"
+                android:layout_alignParentBottom="true"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp">
 
-            <RelativeLayout
-                android:background="@drawable/ripple_bg"
-                android:id="@+id/activity_rLayout_version"
-                android:layout_width="match_parent"
-                android:layout_height="60dp">
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
 
-                <ImageView
-                    android:layout_margin="20dp"
-                    android:layout_centerVertical="true"
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:src="@drawable/ic_vintage"
-                    android:contentDescription="@string/main_switch" />
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp">
 
-                <TextView
-                    android:layout_marginStart="60dp"
-                    android:layout_centerVertical="true"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/version"
-                    tools:ignore="RelativeOverlap" />
+                        <TextView
+                            android:layout_margin="15dp"
+                            android:textSize="15sp"
+                            android:textColor="@color/colorAccent"
+                            android:text="@string/set_up_keyboard_size"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content" />
 
-            </RelativeLayout>
+                        <TextView
+                            android:layout_marginEnd="16dp"
+                            android:gravity="center"
+                            android:layout_alignParentEnd="true"
+                            android:id="@+id/activity_main_adjust"
+                            android:padding="8dp"
+                            android:textColor="@color/colorAccent"
+                            android:background="@drawable/ripple_bg"
+                            android:text="@string/get_now_keyboard_adjust"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent" />
 
-            <RelativeLayout
-                android:background="@drawable/ripple_bg"
-                android:id="@+id/activity_rLayout_author"
-                android:layout_width="match_parent"
-                android:layout_height="60dp">
+                    </RelativeLayout>
 
-                <ImageView
-                    android:layout_margin="20dp"
-                    android:layout_centerVertical="true"
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:src="@drawable/ic_authoe"
-                    android:contentDescription="@string/author" />
 
-                <TextView
-                    android:layout_marginStart="60dp"
-                    android:layout_centerVertical="true"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/author"
-                    tools:ignore="RelativeOverlap" />
 
-            </RelativeLayout>
+                    <EditText
+                        android:inputType="number"
+                        android:lines="1"
+                        android:layout_margin="8dp"
+                        android:id="@+id/activity_main_edit"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp" />
 
-            <RelativeLayout
-                android:background="@drawable/ripple_bg"
-                android:id="@+id/activity_rLayout_money"
-                android:layout_width="match_parent"
-                android:layout_height="60dp">
+                    <LinearLayout
+                        android:layout_gravity="end"
+                        android:orientation="horizontal"
+                        android:layout_width="wrap_content"
+                        android:layout_height="50dp">
 
-                <ImageView
-                    android:layout_margin="20dp"
-                    android:layout_centerVertical="true"
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:src="@drawable/ic_money"
-                    android:contentDescription="@string/donation" />
+                        <Button
+                            android:id="@+id/activity_main_no"
+                            android:textColor="@color/colorAccent"
+                            android:background="@drawable/ripple_bg"
+                            android:text="@string/no"
+                            android:padding="8dp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent" />
 
-                <TextView
-                    android:layout_marginStart="60dp"
-                    android:layout_centerVertical="true"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/donation"
-                    tools:ignore="RelativeOverlap" />
+                        <Button
+                            android:id="@+id/activity_main_set"
+                            android:padding="8dp"
+                            android:textColor="@color/colorAccent"
+                            android:background="@drawable/ripple_bg"
+                            android:text="@string/get_now_keyboard_size"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent" />
 
-            </RelativeLayout>
+                        <Button
+                            android:id="@+id/activity_main_yes"
+                            android:padding="8dp"
+                            android:textColor="@color/colorAccent"
+                            android:background="@drawable/ripple_bg"
+                            android:text="@string/yes"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent" />
 
-        </LinearLayout>
-        </android.support.v7.widget.CardView>
+                    </LinearLayout>
 
-        </LinearLayout>
+                </LinearLayout>
 
-    </ScrollView>
+
+            </android.support.v7.widget.CardView>
+
+        </cn.heyanle.musicballpro.view.activities.main.MyRelativeLayout>
+
+
+
+
+    </RelativeLayout>
 
 </LinearLayout>

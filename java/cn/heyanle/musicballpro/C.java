@@ -1,17 +1,14 @@
 package cn.heyanle.musicballpro;
 
 /**
- * MusicBallPro 项目常量静态类
+ * 项目常量 静态类
  * Created by HeYanLe
- * 2019/1/25 0025
+ * 2019/2/3 0003
  * https://github.com/heyanLE
  */
 public class C {
 
-    /**
-     * 是否为DeBug模式
-     */
     public static boolean IS_DEBUG = false;
-
+    public static float VERSION = 1.9f;
 
 }

@@ -5,9 +5,9 @@ import android.util.Log;
 import cn.heyanle.musicballpro.C;
 
 /**
- * 包装原始Log的v,d,i,w,e方法
+ * 自定义Log输出类
  * Created by HeYanLe
- * 2019/1/25 0025
+ * 2019/2/3 0003
  * https://github.com/heyanLE
  */
 public class HeLog {
@@ -62,4 +62,5 @@ public class HeLog {
     public static void e(String value,String msg,Object classInit){
         if (C.IS_DEBUG) Log.e(classInit.getClass().getName(),value + " -> " + msg);
     }
+
 }

@@ -4,74 +4,115 @@ import android.app.Application;
 import android.content.Context;
 import android.content.Intent;
 
-import com.tencent.bugly.crashreport.CrashReport;
+import com.umeng.commonsdk.UMConfigure;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.lang.reflect.Constructor;
-import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import java.util.Enumeration;
 
-import cn.heyanle.musicballpro.bean.MusicInfo;
-import cn.heyanle.musicballpro.model.MainModel;
-import cn.heyanle.musicballpro.model.MusicModel;
+import cn.heyanle.musicballpro.models.MainModel;
+import cn.heyanle.musicballpro.models.MusicModel;
+import cn.heyanle.musicballpro.models.WhiteModel;
 import cn.heyanle.musicballpro.utils.HeLog;
-import cn.heyanle.musicballpro.utils.rx.Followable;
 import cn.heyanle.musicballpro.view.activities.NulActivity;
-import dalvik.system.DexFile;
 
 /**
- * 自定义Application
- * 自定义异常监听 MainModel的初始化
  * Created by HeYanLe
- * 2019/1/25 0025
+ * 2019/2/3 0003
  * https://github.com/heyanLE
  */
 public class HeApp extends Application {
+
 
     @Override
     public void onCreate() {
         super.onCreate();
 
-        /*
-        MainModel初始化 （反射）
-         */
-        try {
-            Class<MainModel> c = MainModel.class;
-            Constructor<MainModel> constructor = c.getDeclaredConstructor();
-            constructor.setAccessible(true);
-            MainModel ma = constructor.newInstance();
-            ma.init(this);
-        }catch (InvocationTargetException |InstantiationException | IllegalAccessException | NoSuchMethodException e ){
-            e.printStackTrace();
-        }
 
-        /*
-        反射初始化MusicModel
-         */
-        try {
-            Class<MusicModel> c = MusicModel.class;
-            Constructor<MusicModel> constructor = c.getDeclaredConstructor();
-            constructor.setAccessible(true);
-            MusicModel musicModel = constructor.newInstance();
-            Method method = c.getDeclaredMethod("onStart");
+        try{
+
+            /*
+            初始化MainModel 单例模式
+             */
+
+            Class<MainModel> mC = MainModel.class;
+            Constructor<MainModel> cMC = mC.getDeclaredConstructor();
+            cMC.setAccessible(true);
+            Method method = mC.getDeclaredMethod("init", Context.class);
             method.setAccessible(true);
-            method.invoke(musicModel);
+            MainModel m = cMC.newInstance();
+            method.invoke(m,this);
 
-        }catch (Exception e ){
+
+        }catch (Exception e){
             e.printStackTrace();
         }
+
+        try{
+
+            /*
+            初始化MusicModel 单例模式
+             */
+
+            Class<MusicModel> mC = MusicModel.class;
+            Constructor<MusicModel> cMC = mC.getDeclaredConstructor();
+            cMC.setAccessible(true);
+            Method method = mC.getDeclaredMethod("init");
+            method.setAccessible(true);
+            MusicModel m = cMC.newInstance();
+            method.invoke(m);
+
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+        try{
+
+            /*
+            初始化WhiteModel 单例模式
+             */
+
+            Class<WhiteModel> mC = WhiteModel.class;
+            Constructor<WhiteModel> cMC = mC.getDeclaredConstructor();
+            cMC.setAccessible(true);
+            Method method = mC.getDeclaredMethod("init", Context.class);
+            method.setAccessible(true);
+            WhiteModel m = cMC.newInstance();
+            method.invoke(m,this);
+
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+
+        try{
+
+            /*
+            初始化MainProcurator 单例模式
+             */
+
+            Class<MainProcurator> mC = MainProcurator.class;
+            Constructor<MainProcurator> cMC = mC.getDeclaredConstructor();
+            cMC.setAccessible(true);
+            //Method method = mC.getDeclaredMethod("init");
+            cMC.newInstance();
+
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+		//这部分appid码不公开
+        UMConfigure.init(this, "","", UMConfigure.DEVICE_TYPE_PHONE, null);
 
         /*
         CrashHandler初始化
          */
         Thread.setDefaultUncaughtExceptionHandler(new CrashHandler(this));
 
-        /*
-        初始化Bugly
-         */
-        CrashReport.initCrashReport(getApplicationContext(), "9d759c1335", C.IS_DEBUG);
 
     }
 }

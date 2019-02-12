@@ -7,12 +7,8 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
 import android.provider.Settings;
-import android.widget.Toast;
 
-import com.qmuiteam.qmui.util.QMUIDeviceHelper;
-import com.qmuiteam.qmui.util.QMUIDisplayHelper;
-
-import cn.heyanle.musicballpro.R;
+import cn.heyanle.musicballpro.qmui.QMUIDeviceHelper;
 
 /**
  * 权限帮助者 静态类
@@ -31,12 +27,16 @@ public class PermissionHelper {
     public static boolean drawOverlayEnable(Context context){
 
         final int version = Build.VERSION.SDK_INT;//获取SDK版本
-        boolean enable;
+        boolean enable = true;
         if (version >= 23){ //如果为安卓M以上 直接调用系统api
             enable = Settings.canDrawOverlays(context);
-        }else{ //如果为安卓5 调用QMUI权限检测
+        }else{
             enable = QMUIDeviceHelper.isFloatWindowOpAllowed(context);
         }
+        /*
+        else{ //如果为安卓5 调用QMUI权限检测
+            //enable = QMUIDeviceHelper.isFloatWindowOpAllowed(context);
+        }*/
         return enable;
 
     }

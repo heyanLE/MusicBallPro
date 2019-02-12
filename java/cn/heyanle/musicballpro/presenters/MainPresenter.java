@@ -1,32 +1,27 @@
 package cn.heyanle.musicballpro.presenters;
 
-import android.Manifest;
-import android.app.Activity;
-import android.content.ComponentName;
+import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.content.res.Resources;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
-import android.os.Build;
-import android.provider.MediaStore;
-import android.support.v4.app.ActivityCompat;
+import android.support.v7.widget.CardView;
 import android.view.View;
-import android.widget.ImageView;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.SeekBar;
-import android.widget.Switch;
+import android.widget.TextView;
 import android.widget.Toast;
 
-import java.io.InputStream;
+
+import java.util.logging.Handler;
 
 import cn.heyanle.musicballpro.R;
-import cn.heyanle.musicballpro.model.MainModel;
+import cn.heyanle.musicballpro.models.MainModel;
+import cn.heyanle.musicballpro.qmui.QMUIKeyboardHelper;
 import cn.heyanle.musicballpro.utils.HeLog;
 import cn.heyanle.musicballpro.utils.PermissionHelper;
+import cn.heyanle.musicballpro.view.activities.NoteActivity;
 import cn.heyanle.musicballpro.view.activities.main.IMainActivity;
 import cn.heyanle.musicballpro.view.activities.main.MainActivity;
 import cn.heyanle.musicballpro.view.view.SwitchRelative;
@@ -58,7 +53,17 @@ public class MainPresenter {
     private SeekBar sBallSize;                      //小球大小
     private SeekBar sBallBackgroundSize;            //小球背景半透明大小
     private SeekBar sBallBorderWidth;               //小球边框宽度
+    private SeekBar sBallAlpha;
     private SwitchRelative rKeepEdge;               //自动贴边
+
+    private SwitchRelative rDodge;                  //避让输入法-开关
+    private RelativeLayout rSet;                    //点击记录输入法高度
+
+    private CardView cardView;                      //记录窗口
+    private TextView nowKeybardSize;                //当前输入法高度
+    private SwitchRelative rIsTrun;                  //是否旋转
+
+    private View vv;
 
     /**
      * 构造方法
@@ -83,6 +88,10 @@ public class MainPresenter {
 
         rKeepEdge.setChecked(MainModel.getInstance().isKeepEdge());//自动贴边
 
+        rDodge.setChecked(MainModel.getInstance().isAvoidKeyboard());//避让输入法
+
+        rIsTrun.setChecked(MainModel.getInstance().isTurn());
+
     }
 
     /**
@@ -93,6 +102,9 @@ public class MainPresenter {
         sBallSize.setProgress(MainModel.getInstance().getBallSize() - 100);//小球大小
         sBallBackgroundSize.setProgress(MainModel.getInstance().getBallBackgroundSize());//小球背景半透明大小
         sBallBorderWidth.setProgress(MainModel.getInstance().getBallBorderWidth());//小球边框宽度
+        sBallAlpha.setProgress(MainModel.getInstance().getAlpha());
+
+        ballSize = MainModel.getInstance().getBallSize();
 
     }
 
@@ -123,10 +135,161 @@ public class MainPresenter {
         rShowOverlay = (SwitchRelative) iMain.findView(R.id.activity_rLayout_overlay);
         rNotificationListener = (SwitchRelative) iMain.findView(R.id.activity_rLayout_notification);
         rKeepEdge = (SwitchRelative) iMain.findView(R.id.activity_rLayout_line);
+        rDodge = (SwitchRelative) iMain.findView(R.id.activity_rLayout_dodge);
+        rIsTrun = (SwitchRelative) iMain.findView(R.id.activity_rLayout_round);
 
         sBallSize = (SeekBar) iMain.findView(R.id.activity_seek_ballSize);
         sBallBackgroundSize = (SeekBar) iMain.findView(R.id.activity_seek_alpha);
         sBallBorderWidth = (SeekBar) iMain.findView(R.id.activity_seek_border);
+        sBallAlpha = (SeekBar) iMain.findView(R.id.activity_seek_lpha);
+
+        rSet = (RelativeLayout) iMain.findView(R.id.activity_rLayout_set);
+        cardView = (CardView) iMain.findView(R.id.activity_set_card) ;
+
+        nowKeybardSize = (TextView) iMain.findView(R.id.activity_tv);
+
+        final int i = MainModel.getInstance().getKeyboardSize();
+        if (i <= 0){
+
+            //MainModel.getInstance().keyboardSize(-1).apply();
+            String ss = iMain.getContext().getResources().getString(R.string.click_to_set_up_keyboard_size);
+            nowKeybardSize.setText(ss);
+
+        }
+        else{
+            ///MainModel.getInstance().keyboardSize(i).apply();
+            String ss = iMain.getContext().getResources().getString(R.string.keyboard_size,i);
+            nowKeybardSize.setText(ss);
+        }
+
+        vv = iMain.findView(R.id.activity_set_card_v);
+
+        final EditText e = cardView.findViewById(R.id.activity_main_edit);
+        Button getN = cardView.findViewById(R.id.activity_main_set);
+        Button yes = cardView.findViewById(R.id.activity_main_yes);
+        Button no = cardView.findViewById(R.id.activity_main_no);
+
+        rSet.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new android.os.Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        vv.setVisibility(View.VISIBLE);
+                        cardView.setVisibility(View.VISIBLE);
+                        int i = MainModel.getInstance().getKeyboardSize();
+                        if (i <= 0){
+
+                            //MainModel.getInstance().keyboardSize(-1).apply();
+                            //String ss = iMain.getContext().getResources().getString(R.string.click_to_set_up_keyboard_size);
+                            e.setText("-1");
+
+                        }
+                        else{
+                            ///MainModel.getInstance().keyboardSize(i).apply();
+                            String ss = i+"";
+                            e.setText(ss);
+                        }
+
+                        QMUIKeyboardHelper.showKeyboard(e,false);
+                    }
+                }, 200);
+
+            }
+        });
+
+        getN.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new android.os.Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        String s = MainActivity.keyboardSize+"";
+                        e.setText(s);
+                    }
+                }, 200);
+
+            }
+        });
+
+        yes.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new android.os.Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        String s = e.getText().toString();
+                        int i = -1;
+                        try {
+                            i = Integer.parseInt(s);
+                        }catch (Exception e){
+                            e.printStackTrace();
+                        }
+                        if (i <= 0){
+
+                            MainModel.getInstance().keyboardSize(-1).apply();
+                            String ss = iMain.getContext().getResources().getString(R.string.click_to_set_up_keyboard_size);
+                            nowKeybardSize.setText(ss);
+
+                        }
+                        else{
+                            MainModel.getInstance().keyboardSize(i).apply();
+                            String ss = iMain.getContext().getResources().getString(R.string.keyboard_size,i);
+                            nowKeybardSize.setText(ss);
+                        }
+                        vv.setVisibility(View.GONE);
+                        cardView.setVisibility(View.GONE);
+                        QMUIKeyboardHelper.hideKeyboard(e);
+                    }
+                }, 200);
+
+            }
+        });
+
+        no.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new android.os.Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        vv.setVisibility(View.GONE);
+                        cardView.setVisibility(View.GONE);
+                        QMUIKeyboardHelper.hideKeyboard(e);
+                    }
+                }, 200);
+
+            }
+        });
+
+        vv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new android.os.Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        QMUIKeyboardHelper.hideKeyboard(e);
+                        vv.setVisibility(View.GONE);
+                        cardView.setVisibility(View.GONE);
+                    }
+                }, 200);
+            }
+        });
+
+        iMain.findView(R.id.activity_main_adjust).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new android.os.Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        e.setText("-1");
+                        MainModel.getInstance().keyboardSize(-1).apply();
+                        vv.setVisibility(View.GONE);
+                        cardView.setVisibility(View.GONE);
+                        QMUIKeyboardHelper.hideKeyboard(e);
+                    }
+                },200);
+            }
+        });
 
         /*
         各种RelativeLayout的监听
@@ -200,6 +363,12 @@ public class MainPresenter {
                         case R.id.activity_rLayout_line:
                             HeLog.i("avoidKeyboard",isChecked+"",this);
                             MainModel.getInstance().keepEdge(isChecked).apply();
+                            break;
+                        case R.id.activity_rLayout_dodge:
+                            MainModel.getInstance().avoidKeyboard(isChecked).apply();
+                            break;
+                        case R.id.activity_rLayout_round:
+                            MainModel.getInstance().setTurn(isChecked).apply();
                     }
 
                 }
@@ -217,6 +386,8 @@ public class MainPresenter {
         rNotificationListener.setOnSwitchChangeListener(switchListener);
         rShowOverlay.setOnSwitchChangeListener(switchListener);
         rKeepEdge.setOnSwitchChangeListener(switchListener);
+        rDodge.setOnSwitchChangeListener(switchListener);
+        rIsTrun.setOnSwitchChangeListener(switchListener);
 
         /*
         SeekBar配置
@@ -225,6 +396,7 @@ public class MainPresenter {
         sBallSize.setMax(200);//滑动范围
         sBallBorderWidth.setMax(50);
         sBallBackgroundSize.setMax(50);
+        sBallAlpha.setMax(254);
 
         /*
         SeekBar监听
@@ -249,6 +421,9 @@ public class MainPresenter {
                             break;
                         case R.id.activity_seek_border://小球边框宽度 直接更新 但结束滑动时保存
                             MainModel.getInstance().ballBorderWidth(progress);
+                            break;
+                        case R.id.activity_seek_lpha:
+                            MainModel.getInstance().alpha(progress);
                             break;
 
 
@@ -280,6 +455,7 @@ public class MainPresenter {
         sBallSize.setOnSeekBarChangeListener(seekBarListener);
         sBallBackgroundSize.setOnSeekBarChangeListener(seekBarListener);
         sBallBorderWidth.setOnSeekBarChangeListener(seekBarListener);
+        sBallAlpha.setOnSeekBarChangeListener(seekBarListener);
 
         /*
         更新状态
@@ -290,7 +466,7 @@ public class MainPresenter {
         iMain.findView(R.id.activity_rLayout_author).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                android.support.v7.app.AlertDialog.Builder builder = new android.support.v7.app.AlertDialog.Builder(iMain.getContext());
+                AlertDialog.Builder builder = new AlertDialog.Builder(iMain.getContext());
                 builder.setTitle(iMain.getContext().getText(R.string.dialog_title_author));
                 builder.setMessage(iMain.getContext().getText(R.string.dialog_msg_author));
                 builder.setPositiveButton("确定", null);
@@ -301,67 +477,27 @@ public class MainPresenter {
         iMain.findView(R.id.activity_rLayout_money).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                android.support.v7.app.AlertDialog.Builder builder = new android.support.v7.app.AlertDialog.Builder(iMain.getContext());
+                AlertDialog.Builder builder = new AlertDialog.Builder(iMain.getContext());
                 builder.setTitle(iMain.getContext().getText(R.string.donation));
-                builder.setItems(new String[]{"支付宝","微信"},new DialogInterface.OnClickListener(){
+                builder.setMessage("谢谢支持");
+                builder.setNegativeButton("支付宝", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        if (which == 0){
-                            //支付宝
-                            Uri uri = Uri.parse("https://qr.alipay.com/fkx09847iklbas7bqyv9w0f?t=1548940425674");
-                            Intent intent = new Intent(Intent.ACTION_VIEW, uri);
-                            iMain.getContext().startActivity(intent);
-                            Toast.makeText(iMain.getContext(), "谢谢支持！", Toast.LENGTH_SHORT).show();
-                        }else{
-                            android.support.v7.app.AlertDialog.Builder builder = new android.support.v7.app.AlertDialog.Builder(iMain.getContext());
-                            builder.setTitle(iMain.getContext().getText(R.string.savePng));
-                            final ImageView imageView = new ImageView(iMain.getContext());
-                            imageView.setImageResource(R.drawable.weixin);
-                            builder.setView(imageView);
-                            builder.setPositiveButton("确定", null);
-                            builder.setNegativeButton("保存到相册", new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog, int which) {
-
-                                    String[] PERMISSIONS_STORAGE = {
-                                            Manifest.permission.READ_EXTERNAL_STORAGE,
-                                            Manifest.permission.WRITE_EXTERNAL_STORAGE};
-
-                                    int REQUEST_PERMISSION_CODE = 1;
-
-                                    if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
-                                        if (ActivityCompat.checkSelfPermission(iMain.getContext(), Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
-                                            Toast.makeText(iMain.getContext(),"请授予读写权限",Toast.LENGTH_SHORT).show();
-                                            ActivityCompat.requestPermissions((Activity) iMain.getContext(), PERMISSIONS_STORAGE, REQUEST_PERMISSION_CODE);
-                                        }else{
-                                            Resources r = iMain.getContext().getResources();
-                                            Bitmap bmp=BitmapFactory.decodeResource(r, R.drawable.weixin);
-                                            //Bitmap newb = Bitmap.createBitmap( 300, 300, Bitmap.Config.ARGB_8888 );
-                                            MediaStore.Images.Media.insertImage(iMain.getContext().getContentResolver(),bmp, "title", "description");
-                                            try {
-                                                Intent intent = new Intent(Intent.ACTION_MAIN);
-                                                ComponentName cmp = new ComponentName("com.tencent.mm", "com.tencent.mm.ui.LauncherUI");
-
-                                                intent.addCategory(Intent.CATEGORY_LAUNCHER);
-                                                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                                                intent.setComponent(cmp);
-                                                iMain.getContext().startActivity(intent);
-
-                                                Toast.makeText(iMain.getContext(), "请扫码支付！谢谢支持！", Toast.LENGTH_SHORT).show();
-                                            }catch (Exception e){
-                                                e.printStackTrace();
-                                                Toast.makeText(iMain.getContext(), "打开微信失败，请手动打开扫码支付，谢谢支持！", Toast.LENGTH_SHORT).show();
-                                            }
-                                        }
-                                    }
-                                }
-                            });
-                            builder.show();
-                        }
+                        Uri uri = Uri.parse("https://qr.alipay.com/fkx08279lzlulckwbawjj90");
+                        Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+                        iMain.getContext().startActivity(intent);
                     }
                 });
                 builder.setPositiveButton("残忍拒绝", null);
                 builder.show();
+            }
+        });
+
+        iMain.findView(R.id.activity_rLayout_note).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(iMain.getContext(),NoteActivity.class);
+                iMain.getContext().startActivity(intent);
             }
         });
 
@@ -382,5 +518,15 @@ public class MainPresenter {
      * Destroy生命周期（与MainActivity同步）
      */
     public void onDestroy(){}
+
+    public void onBackPressed(){
+        if (vv.getVisibility() == View.VISIBLE){
+            vv.setVisibility(View.GONE);
+            cardView.setVisibility(View.GONE);
+        }
+        else{
+            iMain.finishMy();
+        }
+    }
 
 }

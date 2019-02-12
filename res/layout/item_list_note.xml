@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@drawable/ripple_bg"
+    android:id="@+id/activity_rLayout_note"
+    android:layout_width="match_parent"
+    android:layout_height="60dp">
+
+    <ImageView
+        android:id="@+id/item_list_note_img"
+        android:layout_margin="15dp"
+        android:layout_centerVertical="true"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:src="@drawable/ic_music"
+        android:contentDescription="@string/donation" />
+
+    <TextView
+        android:id="@+id/item_list_note_name"
+        android:layout_marginStart="60dp"
+        android:layout_centerVertical="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="音乐球Pro"
+        tools:ignore="RelativeOverlap" />
+
+    <ImageView
+        android:background="?android:attr/selectableItemBackgroundBorderless"
+        android:padding="20dp"
+        android:id="@+id/item_list_note_close"
+        android:src="@drawable/ic_close"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_centerVertical="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="10dp"
+        tools:ignore="ContentDescription" />
+
+</RelativeLayout>

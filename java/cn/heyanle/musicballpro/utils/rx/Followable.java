@@ -1,78 +1,97 @@
 package cn.heyanle.musicballpro.utils.rx;
 
 import android.os.Handler;
-import android.support.annotation.NonNull;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import cn.heyanle.musicballpro.models.MainModel;
+import cn.heyanle.musicballpro.utils.HeLog;
+
 /**
- * Rx组件 被跟随者(不支持多线程)
- * 绑定跟随者 更新信息 背压 链式调用
+ * Followable 被跟随着 （不支持多线程）
+ * 绑定跟随者 发信息给跟随者 背压
+ * @see Follower
  * Created by HeYanLe
- * 2019/1/31 0031
+ * 2019/2/3 0003
  * https://github.com/heyanLE
  */
-public class Followable <T> {
+public class Followable <T>{
 
-    private Follower<T> f = null;
+    /**
+     * 跟随者
+     */
+    private Follower<T> mFollower = null;
 
-    private int backPressureDelay = 500;//背压延迟时间 单位ms
-    private List<T> backPressureTemporary = new ArrayList<>();//发送事件暂存器（为了支持背压）
+    /**
+     * 缓冲列表
+     */
+    private List<T> mBufferList = new ArrayList<>();
 
-    private boolean isDelay = false;//当前是否为背压延迟状态
+    /**
+     * 缓冲时间 单位MS
+     */
+    private int mBufferTime = 500;
 
     /*
-    背压延迟结束
+    缓冲延迟结束
     发射背压延迟时候的最后一个发射请求
      */
-    private Handler handler = new Handler();
-    private Runnable r = new Runnable() {
+    private Handler mHandler = new Handler();
+    private Runnable mRunnable = new Runnable() {
         @Override
         public void run() {
-            if (backPressureTemporary.size()!=0) {
-                f.onReceive(backPressureTemporary.get(backPressureTemporary.size() - 1));
+            if (mBufferList.size() != 0) {//如果不为空
+                /*
+                向Follower发送缓冲时间最后一个请求
+                 */
+                HeLog.i("发送信息",mBufferList.get(mBufferList.size() - 1).toString(),this);
+                mFollower.onFollowableReceive(mBufferList.get(mBufferList.size() - 1));
             }
-            backPressureTemporary.clear();
-            isDelay = false;
+            mBufferList.clear();//清空缓冲区
         }
     };
 
     /**
-     * 绑定跟随者
-     * @param f     跟随者
-     * @return      链式调用
-     */
-    public Followable<T> followedBy(Follower<T> f){
-        this.f = f;
-        return this;
-    }
-
-    /**
-     * 请求发射（最终能否被发射取决于背压机制）
-     * @param msg   发射的信息
+     * 请求发送
+     * 最终能否被发送取决于缓冲机制
+     * @param msg       信息
      */
     public void requestSend(T msg){
-        if (! isDelay ){
 
-            isDelay = true;
-            handler.postDelayed(r,backPressureDelay);
+        HeLog.i("请求发送信息",msg.toString(),this);
 
+        if (mBufferList.size() == 0){//如果缓冲区为空 则进入缓冲模式
+            HeLog.i("进入缓冲模式",mBufferTime + "",this);
+            mHandler.postDelayed(mRunnable,mBufferTime);
         }
-        backPressureTemporary.add(msg);
+
+        mBufferList.add(msg);//将请求放入缓冲区
 
     }
 
     /**
-     * 设置背压延迟时间
-     * @param delayTime     背压延迟时间
+     * 绑定跟随者
+     * @param follower      跟随者
      * @return              链式调用
      */
-    public Followable<T> delay(int delayTime){
-        backPressureDelay = delayTime;
+    public Followable<T> followBy(Follower<T> follower){
+        mFollower = follower;
         return this;
     }
 
+    /**
+     * 设置延迟时间
+     * @param bufferTime    延迟时间
+     * @return              链式调用
+     */
+    public Followable<T> bufferTime(int bufferTime){
+        mBufferTime = bufferTime;
+        return  this;
+    }
 
+    public Followable(){
+        mBufferList.clear();
+    }
 
 }

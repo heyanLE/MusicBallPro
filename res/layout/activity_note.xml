@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <Toolbar
+        android:titleTextColor="#fff"
+        android:id="@+id/activity_main_toolbar"
+        android:title="白名单"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"
+        android:elevation="8dp"/>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <android.support.v7.widget.CardView
+                android:layout_marginTop="8dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardElevation="6dp">
+
+                <LinearLayout
+                    android:layout_marginBottom="8dp"
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp">
+
+                        <TextView
+                            android:layout_centerVertical="true"
+                            android:layout_margin="15dp"
+                            android:textSize="15sp"
+                            android:textColor="@color/colorAccent"
+                            android:text="@string/show_note"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content" />
+
+                        <ImageView
+                            android:background="?android:attr/selectableItemBackgroundBorderless"
+                            android:padding="15dp"
+                            android:id="@+id/activity_note_img_show"
+                            android:layout_centerVertical="true"
+                            android:layout_alignParentEnd="true"
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            android:layout_marginEnd="15dp"
+                            android:src="@drawable/ic_add"/>
+
+                        <TextView
+                            android:id="@+id/activity_note_tv"
+                            android:visibility="gone"
+                            android:layout_alignParentEnd="true"
+                            android:layout_margin="15dp"
+                            android:textSize="15sp"
+                            android:textColor="#ff0000"
+                            android:text="@string/no_permission"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+
+                    </RelativeLayout>
+
+                    <cn.heyanle.musicballpro.view.view.ListView
+                        android:id="@+id/activity_note_list_show"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:dividerHeight="0dp"
+                        android:divider="@null"
+                        android:listSelector="@android:color/transparent"/>
+
+                </LinearLayout>
+
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
+                android:layout_marginTop="8dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardElevation="6dp">
+
+                <LinearLayout
+                    android:layout_marginBottom="8dp"
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp">
+
+                        <TextView
+                            android:layout_centerVertical="true"
+                            android:layout_margin="15dp"
+                            android:textSize="15sp"
+                            android:textColor="@color/colorAccent"
+                            android:text="@string/music_note"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content" />
+
+                        <ImageView
+                            android:background="?android:attr/selectableItemBackgroundBorderless"
+                            android:padding="15dp"
+                            android:id="@+id/activity_note_img_music"
+                            android:layout_centerVertical="true"
+                            android:layout_alignParentEnd="true"
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            android:layout_marginEnd="15dp"
+                            android:src="@drawable/ic_add"/>
+
+                    </RelativeLayout>
+
+                    <cn.heyanle.musicballpro.view.view.ListView
+                        android:id="@+id/activity_note_list_music"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:dividerHeight="0dp"
+                        android:divider="@null"
+                        android:listSelector="@android:color/transparent"/>
+
+                </LinearLayout>
+
+            </android.support.v7.widget.CardView>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="8dp"/>
+
+
+        </LinearLayout>
+
+    </ScrollView>
+</LinearLayout>

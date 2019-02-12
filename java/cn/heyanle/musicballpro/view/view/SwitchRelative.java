@@ -70,7 +70,7 @@ public class SwitchRelative extends RelativeLayout {
          */
         int marginEnd = (int)(TypedValue.applyDimension(
                 TypedValue.COMPLEX_UNIT_PX,
-                20,
+                50,
                 context.getResources().getDisplayMetrics())+0.5f);
 
         params.setMarginEnd(marginEnd);//右外距
